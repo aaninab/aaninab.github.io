@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Developing Data Product - Week4 Assignment</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Developing Data Product - Week4 Assignment">
+  <meta name="author" content="Anina Buchmann">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>Developing Data Product - Week4 Assignment</h1>
+    <h2>Shiny App - Liquor Store Data</h2>
+    <p>Anina Buchmann<br/>24/02/2017</p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>Information</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Programming Assignments of Coursera.com online course: Developing Data Products</p></li>
+<li><p>This is a reproducible pitch presentation about a Shiny application, which can be tested on <a href="https://aaninab.shinyapps.io/developingdataproductweek4/">https://aaninab.shinyapps.io/developingdataproductweek4/</a>.</p></li>
+<li><p>The according code can be found on GitHub <a href="https://github.com/aaninab/Developing-Data-Products">https://github.com/aaninab/Developing-Data-Products</a>.</p></li>
+<li><p>The data can be found on <a href="https://www.opendatabc.ca/dataset/bc-liquor-store-product-price-list-current-prices">https://www.opendatabc.ca/dataset/bc-liquor-store-product-price-list-current-prices</a>.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>The App</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>This application shows a distribution of the alcohol content of liquor. It is filtered per country and per liquor type within a given price range.</p></li>
+<li><p>Additionally, the underlying data is shown with detailed information in a table below.</p></li>
+<li><p>One can choose between four different type of liquors and three countries. Plus, the price range can be defined individually.</p></li>
+<li><p>It can occur that no plot is shown. In that case no data is available.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Histogram of Alcohol Content - Plot</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>The following plot shows a histogram of alcohol content for the country Germany, the liquor type Beer and within a price range of 5 Euro up to 50 Euro.
+<img src="assets/fig/ggplot2_plot-1.png" alt="plot of chunk ggplot2_plot"></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Histogram of Alcohol Content - Code</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r"># Load the data of the British Columbia Liquor Store into a variable 
+bcls &lt;- read.csv(&quot;BC_Liquor_Store_Product_Price_List.csv&quot;, stringsAsFactors = FALSE) 
+# Filter the data to reduce number of lines in the data sets
+bcls_filt &lt;- bcls %&gt;%
+             filter(
+               CURRENT_DISPLAY_PRICE &gt;= 5,
+               CURRENT_DISPLAY_PRICE &lt;= 50,
+               PRODUCT_COUNTRY_ORIGIN_NAME == &quot;GERMANY&quot;,
+               PRODUCT_CLASS_NAME == &quot;BEER&quot;
+             )
+# Draw the histogram with ggplot and name the axis and title
+q &lt;-ggplot(data = bcls_filt, aes(x = PRODUCT_ALCOHOL_PERCENT)) + 
+      geom_histogram() + 
+      ggtitle(&quot;Histogram of Alcohol Content&quot;) + 
+      xlab(&quot;Alcohol Content in %&quot;) + 
+      ylab(&quot;Number of Liquors&quot;)
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='Information'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='The App'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='Histogram of Alcohol Content - Plot'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='Histogram of Alcohol Content - Code'>
+         4
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
